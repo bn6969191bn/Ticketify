@@ -1,59 +1,78 @@
-
-import mongoose from 'mongoose';
-import * as _ from 'lodash';
-import Promise from 'bluebird';
-import applicationException from '../service/applicationException';
-import mongoConverter from '../service/mongoConverter';
-import uniqueValidator from 'mongoose-unique-validator';
-
+import mongoose from "mongoose";
+import * as _ from "lodash";
+import Promise from "bluebird";
+import applicationException from "../service/applicationException";
+import mongoConverter from "../service/mongoConverter";
+import uniqueValidator from "mongoose-unique-validator";
 
 const userRole = {
-  admin: 'admin',
-  user: 'user'
+  admin: "admin",
+  user: "user",
+  organizer: "organizer",
 };
 
-const userRoles = [userRole.admin, userRole.user];
+const userRoles = [userRole.admin, userRole.user, userRole.organizer];
 
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  name: { type: String, required: true, unique: true },
-  role: { type: String, enum: userRoles, default: userRole.admin, required: false },
-  active: { type: Boolean, default: true, required: false },
-  isAdmin: { type: Boolean, default: true, required: false }
-}, {
-  collection: 'user'
-});
+const userSchema = new mongoose.Schema(
+  {
+    email: { type: String, required: true, unique: true },
+    name: { type: String, required: true, unique: true },
+    role: {
+      type: String,
+      enum: userRoles,
+      default: userRole.user,
+      required: false,
+    },
+    active: { type: Boolean, default: true, required: false },
+    isAdmin: { type: Boolean, default: false, required: false },
+  },
+  {
+    collection: "user",
+  }
+);
 
 userSchema.plugin(uniqueValidator);
 
-const UserModel = mongoose.model('user', userSchema);
+const UserModel = mongoose.model("user", userSchema);
 
 function createNewOrUpdate(user) {
-  return Promise.resolve().then(() => {
-    if (!user.id) {
-      return new  UserModel(user).save().then(result => {
-        if (result) {
-          return mongoConverter(result);
-        }
-      });
-    } else {
-      return UserModel.findByIdAndUpdate(user.id, _.omit(user, 'id'), { new: true });
-    }
-  }).catch(error => {
-    if ('ValidationError' === error.name) {
-      error = error.errors[Object.keys(error.errors)[0]];
-      throw applicationException.new(applicationException.BAD_REQUEST, error.message);
-    }
-    throw error;
-  });
+  return Promise.resolve()
+    .then(() => {
+      if (!user.id) {
+        return new UserModel(user).save().then((result) => {
+          if (result) {
+            return mongoConverter(result);
+          }
+        });
+      } else {
+        return UserModel.findByIdAndUpdate(user.id, _.omit(user, "id"), {
+          new: true,
+        });
+      }
+    })
+    .catch((error) => {
+      if ("ValidationError" === error.name) {
+        error = error.errors[Object.keys(error.errors)[0]];
+        throw applicationException.new(
+          applicationException.BAD_REQUEST,
+          error.message
+        );
+      }
+      throw error;
+    });
 }
 
 async function getByEmailOrName(name) {
-  const result = await UserModel.findOne({ $or: [{ email: name }, { name: name }] });
+  const result = await UserModel.findOne({
+    $or: [{ email: name }, { name: name }],
+  });
   if (result) {
     return mongoConverter(result);
   }
-  throw applicationException.new(applicationException.NOT_FOUND, 'User not found');
+  throw applicationException.new(
+    applicationException.NOT_FOUND,
+    "User not found"
+  );
 }
 
 async function get(id) {
@@ -61,7 +80,10 @@ async function get(id) {
   if (result) {
     return mongoConverter(result);
   }
-  throw applicationException.new(applicationException.NOT_FOUND, 'User not found');
+  throw applicationException.new(
+    applicationException.NOT_FOUND,
+    "User not found"
+  );
 }
 
 async function removeById(id) {
@@ -75,5 +97,5 @@ export default {
   removeById: removeById,
 
   userRole: userRole,
-  model: UserModel
+  model: UserModel,
 };
