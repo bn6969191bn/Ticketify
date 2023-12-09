@@ -2,6 +2,7 @@
 
 import userManager from "./user.manager";
 import categoryManager from "./category.manager";
+import locationManager from "./location.manager";
 
 function getter(manager, request) {
   return function () {
@@ -12,4 +13,5 @@ function getter(manager, request) {
 export default {
   getUserManager: getter(userManager),
   getCategoryManager: getter(categoryManager),
+  getLocationManager: getter(locationManager),
 };
