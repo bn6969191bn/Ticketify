@@ -4,6 +4,7 @@ import userManager from "./user.manager";
 import categoryManager from "./category.manager";
 import locationManager from "./location.manager";
 import eventManager from "./event.manager";
+import ticketManager from "./ticket.manager";
 
 function getter(manager, request) {
   return function () {
@@ -16,4 +17,5 @@ export default {
   getCategoryManager: getter(categoryManager),
   getLocationManager: getter(locationManager),
   getEventManager: getter(eventManager),
+  getTicketManager: getter(ticketManager),
 };
