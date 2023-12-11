@@ -18,27 +18,35 @@ const purchaseEndpoint = (router) => {
     }
   );
 
-  router.get("/api/purchase/all", async (request, response) => {
-    try {
-      const result = await business
-        .getPurchaseManager(request)
-        .getAllPurchases();
-      response.status(200).send(result);
-    } catch (error) {
-      applicationException.errorHandler(error, response);
+  router.get(
+    "/api/purchase/all",
+    roleAuth(["admin"]),
+    async (request, response) => {
+      try {
+        const result = await business
+          .getPurchaseManager(request)
+          .getAllPurchases();
+        response.status(200).send(result);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
     }
-  });
+  );
 
-  router.get("/api/purchase/:purchaseId", async (request, response) => {
-    try {
-      const result = await business
-        .getPurchaseManager(request)
-        .getPurchaseById(request.params.purchaseId);
-      response.status(200).send(result);
-    } catch (error) {
-      applicationException.errorHandler(error, response);
+  router.get(
+    "/api/purchase/:purchaseId",
+    roleAuth(["admin"]),
+    async (request, response) => {
+      try {
+        const result = await business
+          .getPurchaseManager(request)
+          .getPurchaseById(request.params.purchaseId);
+        response.status(200).send(result);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
     }
-  });
+  );
 
   router.delete(
     "/api/purchase/:purchaseId",
