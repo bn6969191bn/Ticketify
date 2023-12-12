@@ -8,7 +8,7 @@ const userEndpoint = (router) => {
     try {
       let result = await business
         .getUserManager(request)
-        .authenticate(request.body.login, request.body.password);
+        .authenticate(request.body.email, request.body.password);
       response.status(200).send(result);
     } catch (error) {
       applicationException.errorHandler(error, response);
