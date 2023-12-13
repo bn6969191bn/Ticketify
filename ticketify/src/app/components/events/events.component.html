@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row g-4">
     <div class="col-md-4" *ngFor="let event of events">
-      <mat-card class="cursor-pointer">
+      <mat-card (click)="goToDetails(event.id)" class="cursor-pointer">
         <mat-card-header>
           <mat-card-title>{{ event.event_name }}</mat-card-title>
         </mat-card-header>
