@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      <mat-card class="shadow-lg mb-5">
+        <mat-card-header class="bg-primary text-white text-center py-4">
+          <mat-card-title class="display-4">{{
+            event.event_name
+          }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="p-5">
+          <h5 class="text-start mb-3"><strong>Data:</strong></h5>
+          <p class="text-start h5 mb-4">
+            {{ event.date_and_time | date : "fullDate" }} o
+            {{ event.date_and_time | date : "shortTime" }}
+          </p>
+
+          <div class="my-5">
+            <h5 class="text-start mb-3"><strong>Lokalizacja:</strong></h5>
+            <p class="text-start h5">
+              {{ event.location.name }}, {{ event.location.address }}
+            </p>
+          </div>
+
+          <div class="my-5">
+            <h5 class="text-start mb-3"><strong>Organizator:</strong></h5>
+            <p class="text-start h5">{{ event.organizer.name }}</p>
+          </div>
+
+          <div class="my-5">
+            <h5 class="text-start mb-3"><strong>Kategoria:</strong></h5>
+            <p class="text-start h5">{{ event.category.category_name }}</p>
+          </div>
+
+          <div class="my-5">
+            <h5 class="text-start mb-3"><strong>Opis:</strong></h5>
+            <p class="text-start h5">{{ event.description }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

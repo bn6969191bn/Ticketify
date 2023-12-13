@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './components/login/login.component';
 import { EventsComponent } from './components/events/events.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { EventsComponent } from './components/events/events.component';
     RegistrationComponent,
     LoginComponent,
     EventsComponent,
+    EventDetailsComponent,
   ],
   imports: [
     BrowserModule,
