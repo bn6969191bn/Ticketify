@@ -9,10 +9,17 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './components/login/login.component';
+import { EventsComponent } from './components/events/events.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    RegistrationComponent,
+    LoginComponent,
+    EventsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let event of events">
+      <mat-card class="cursor-pointer">
+        <mat-card-header>
+          <mat-card-title>{{ event.event_name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Data: {{ event.date_and_time | date : "medium" }}</p>
+          <p>Lokalizacja: {{ event.location.name }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
