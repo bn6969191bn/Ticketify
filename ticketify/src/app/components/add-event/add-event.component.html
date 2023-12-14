@@ -2,10 +2,12 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-8">
       <mat-card class="mb-4">
-        <mat-card-header class="bg-primary text-white">
-          <mat-card-title>Dodaj Wydarzenie</mat-card-title>
+        <mat-card-header
+          class="bg-primary text-white d-flex justify-content-center py-3"
+        >
+          <mat-card-title class="text-center">Dodaj Wydarzenie</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="py-4">
           <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="fill" class="w-100 mb-3">
               <mat-label>Nazwa wydarzenia</mat-label>
@@ -68,14 +70,16 @@
               ></textarea>
             </mat-form-field>
 
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              class="w-100"
-            >
-              Dodaj Wydarzenie
-            </button>
+            <div class="d-flex justify-content-center">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Dodaj Wydarzenie
+              </button>
+            </div>
           </form>
         </mat-card-content>
       </mat-card>

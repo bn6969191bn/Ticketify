@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <mat-card>
+        <mat-card-header
+          class="bg-primary text-white text-center d-flex justify-content-center align-items-center"
+        >
+          <mat-card-title>Dodaj Lokalizację</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="p-4">
+          <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="w-100 mb-4">
+              <mat-label>Nazwa lokalizacji</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-100 mb-4">
+              <mat-label>Adres</mat-label>
+              <input matInput formControlName="address" />
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-100 mb-4">
+              <mat-label>Pojemność</mat-label>
+              <input type="number" matInput formControlName="capacity" />
+            </mat-form-field>
+            <div class="text-center">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Dodaj Lokalizację
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
