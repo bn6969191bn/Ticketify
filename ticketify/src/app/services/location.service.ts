@@ -13,4 +13,8 @@ export class LocationService {
   getAllLocations(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/all`);
   }
+
+  addLocation(location: Location): Observable<Location> {
+    return this.http.post<Location>(`${this.apiUrl}/create`, location);
+  }
 }

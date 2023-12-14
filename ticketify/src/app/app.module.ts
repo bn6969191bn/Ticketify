@@ -13,12 +13,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from './components/login/login.component';
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AddLocationComponent } from './components/add-location/add-location.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     EventsComponent,
     EventDetailsComponent,
     AddEventComponent,
+    AddLocationComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatButtonModule,
   ],
   providers: [
     {
