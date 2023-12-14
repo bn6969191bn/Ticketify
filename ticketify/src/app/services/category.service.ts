@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Category } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +13,9 @@ export class CategoryService {
 
   getAllCategories(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/all`);
+  }
+
+  addCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>(`${this.apiUrl}/create`, category);
   }
 }

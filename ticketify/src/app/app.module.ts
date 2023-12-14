@@ -21,6 +21,7 @@ import { AddEventComponent } from './components/add-event/add-event.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddLocationComponent } from './components/add-location/add-location.component';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AddLocationComponent } from './components/add-location/add-location.com
     EventDetailsComponent,
     AddEventComponent,
     AddLocationComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,
