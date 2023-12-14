@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
+import { AuthResponse } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3001/api/user';
+  private loggedInStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
+  loggedInStatus$ = this.loggedInStatus.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -16,8 +20,33 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/create`, user);
   }
 
-  loginUser(user: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth`, user);
+  loginUser(user: User): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth`, user).pipe(
+      tap((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          this.updateLoggedInStatus();
+        }
+      })
+    );
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.updateLoggedInStatus();
+  }
+
+  updateLoggedInStatus(): void {
+    this.loggedInStatus.next(this.isLoggedIn());
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  isAdminOrOrganizer(): boolean {
+    const user = this.getLoggedInUser();
+    return user === 'admin' || user === 'organizer';
   }
 
   getLoggedInUser() {
@@ -25,7 +54,8 @@ export class AuthService {
     if (!token) return null;
 
     try {
-      return jwtDecode(token);
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.role;
     } catch (Error) {
       console.error('Problem with token decoding', Error);
       return null;

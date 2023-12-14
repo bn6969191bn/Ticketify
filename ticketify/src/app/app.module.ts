@@ -22,6 +22,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
     AddEventComponent,
     AddLocationComponent,
     AddCategoryComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
