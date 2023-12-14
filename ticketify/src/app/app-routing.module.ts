@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'add-event', component: AddEventComponent },
   { path: 'add-location', component: AddLocationComponent },
   { path: 'add-category', component: AddCategoryComponent },
-  { path: '', redirectTo: '/register', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/events']">Ticketify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/events']">Wydarzenia</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdminOrOrganizer">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            (click)="$event.preventDefault()"
+          >
+            Dodaj
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/add-event']"
+                >Dodaj wydarzenie</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/add-location']"
+                >Dodaj lokalizację</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/add-category']"
+                >Dodaj kategorię</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" [routerLink]="['/register']">Rejestracja</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" href="#" (click)="logout()">Wyloguj się</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
