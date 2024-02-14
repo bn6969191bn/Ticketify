@@ -18,6 +18,21 @@ const eventEndpoint = (router) => {
     }
   );
 
+  router.post(
+    "/api/event/buy-ticket",
+    roleAuth(["admin", "organizer"]),
+    async (request, response) => {
+      try {
+        const result = await business
+          .getEventManager(request)
+          .buyTicket(request.body);
+        response.status(200).send(result);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    }
+  );
+
   router.get("/api/event/all", async (request, response) => {
     try {
       const result = await business.getEventManager(request).getAllEvents();

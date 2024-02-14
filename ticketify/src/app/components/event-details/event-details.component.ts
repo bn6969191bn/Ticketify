@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/event.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-event-details',
@@ -12,6 +13,7 @@ export class EventDetailsComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private authService: AuthService,
     private route: ActivatedRoute
   ) {}
 
@@ -30,5 +32,21 @@ export class EventDetailsComponent implements OnInit {
     } else {
       console.error('Wydarzenie o takim ID nie istnieje');
     }
+  }
+
+  buyTicket(): void {
+    const data = {
+      eventId: this.event.id,
+      userId: this.authService.getLoggedInUser().userId,
+    };
+
+    this.eventService.buyTicket(data).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

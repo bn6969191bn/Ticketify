@@ -9,14 +9,12 @@ const purchaseSchema = new mongoose.Schema(
       ref: "user",
       required: true,
     },
-    tickets: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "ticket",
-        required: true,
-      },
-    ],
-    purchase_date: { type: Date, required: true, default: Date.now },
+    ticket: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ticket",
+      required: true,
+    },
+    purchase_date: { type: Date, required: true },
     total_price: { type: Number, required: true },
   },
   {

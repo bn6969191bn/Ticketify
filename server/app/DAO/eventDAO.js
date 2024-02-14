@@ -22,6 +22,8 @@ const eventSchema = new mongoose.Schema(
       ref: "event_category",
       required: true,
     },
+    maxNumberOfTickets: { type: Number, required: true },
+    ticketPrice: { type: Number, required: true },
   },
   {
     collection: "event",

@@ -15,7 +15,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="w-100 mb-3">
-              <mat-label>Data i czas</mat-label>
+              <mat-label>Data</mat-label>
               <input
                 matInput
                 [matDatepicker]="picker"
@@ -68,6 +68,18 @@
                 formControlName="description"
                 rows="4"
               ></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-100 mb-4">
+              <mat-label>Liczba miejsc</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="maxNumberOfTickets"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-100 mb-4">
+              <mat-label>Cena biletu</mat-label>
+              <input matInput type="number" formControlName="ticketPrice" />
             </mat-form-field>
 
             <div class="d-flex justify-content-center">

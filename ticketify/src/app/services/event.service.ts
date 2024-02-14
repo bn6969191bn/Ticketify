@@ -20,4 +20,8 @@ export class EventService {
   addEvent(event: Event): Observable<Event> {
     return this.http.post<Event>(`${this.apiUrl}/create`, event);
   }
+
+  buyTicket(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/buy-ticket`, data);
+  }
 }

@@ -30,6 +30,8 @@ export class AddEventComponent implements OnInit {
       location: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
+      maxNumberOfTickets: new FormControl(1, [Validators.required]),
+      ticketPrice: new FormControl(1, [Validators.required]),
     });
   }
 

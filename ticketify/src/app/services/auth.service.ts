@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   isAdminOrOrganizer(): boolean {
-    const user = this.getLoggedInUser();
+    const user = this.getLoggedInUser().role;
     return user === 'admin' || user === 'organizer';
   }
 
@@ -55,7 +55,7 @@ export class AuthService {
 
     try {
       const decodedToken: any = jwtDecode(token);
-      return decodedToken.role;
+      return decodedToken;
     } catch (Error) {
       console.error('Problem with token decoding', Error);
       return null;

@@ -9,9 +9,7 @@ const ticketSchema = new mongoose.Schema(
       ref: "event",
       required: true,
     },
-    ticket_type: { type: String, required: true },
     price: { type: Number, required: true },
-    isAvailable: { type: Boolean, default: true },
   },
   {
     collection: "ticket",
@@ -70,10 +68,23 @@ async function removeById(id) {
   return await TicketModel.findByIdAndRemove(id);
 }
 
+async function getAllTicketsByEventId(eventId) {
+  try {
+    const tickets = await TicketModel.find({ event: eventId });
+    return tickets.map((ticket) => mongoConverter(ticket));
+  } catch (error) {
+    throw applicationException.new(
+      applicationException.BAD_REQUEST,
+      error.message
+    );
+  }
+}
+
 export default {
   createNewOrUpdate: createNewOrUpdate,
   getById: getById,
   getAllTickets: getAllTickets,
   removeById: removeById,
+  getAllTicketsByEventId: getAllTicketsByEventId,
   model: TicketModel,
 };
