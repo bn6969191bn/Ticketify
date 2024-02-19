@@ -5,6 +5,9 @@ import { LocationService } from '../../services/location.service';
 import { CategoryService } from '../../services/category.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Location } from 'src/app/models/location.model';
+import { Category } from 'src/app/models/category.model';
+import { CurrentUser } from 'src/app/models/currentUser.model';
 
 @Component({
   selector: 'app-add-event',
@@ -13,9 +16,15 @@ import { Router } from '@angular/router';
 })
 export class AddEventComponent implements OnInit {
   eventForm: FormGroup;
-  locations: any[] = [];
-  categories: any[] = [];
-  currentUser: any;
+  locations: Location[] = [];
+  categories: Category[] = [];
+  currentUser: CurrentUser = {
+    userId: '',
+    name: '',
+    role: '',
+    isAdmin: false,
+    access: '',
+  };
 
   constructor(
     private eventService: EventService,
@@ -26,7 +35,7 @@ export class AddEventComponent implements OnInit {
   ) {
     this.eventForm = new FormGroup({
       event_name: new FormControl('', [Validators.required]),
-      date_and_time: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
       location: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),

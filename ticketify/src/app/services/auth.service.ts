@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { AuthResponse } from '../models/auth.model';
+import { RegisteredUser } from '../models/registeredUser';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(user: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create`, user);
+  registerUser(user: User): Observable<RegisteredUser> {
+    return this.http.post<RegisteredUser>(`${this.apiUrl}/create`, user);
   }
 
   loginUser(user: User): Observable<AuthResponse> {
@@ -45,7 +46,7 @@ export class AuthService {
   }
 
   isAdminOrOrganizer(): boolean {
-    const user = this.getLoggedInUser().role;
+    const user = this.getLoggedInUser()?.role;
     return user === 'admin' || user === 'organizer';
   }
 

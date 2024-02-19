@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Event } from 'src/app/models/event.model';
 
 @Component({
   selector: 'app-event-details',
@@ -9,7 +10,26 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./event-details.component.css'],
 })
 export class EventDetailsComponent implements OnInit {
-  event: any;
+  event: Event = {
+    id: '',
+    event_name: '',
+    date: new Date(),
+    location: {
+      name: '',
+      address: '',
+      capacity: 0,
+    },
+    description: '',
+    organizer: {
+      email: '',
+      password: '',
+    },
+    category: {
+      category_name: '',
+    },
+    maxNumberOfTickets: 0,
+    ticketPrice: 0,
+  };
 
   constructor(
     private eventService: EventService,
@@ -42,10 +62,10 @@ export class EventDetailsComponent implements OnInit {
 
     this.eventService.buyTicket(data).subscribe(
       (response) => {
-        console.log(response);
+        console.log('Bilet został zakupiony', response);
       },
       (error) => {
-        console.error(error);
+        console.error('Błąd podczas zakupu biletu', error);
       }
     );
   }

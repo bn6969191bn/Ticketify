@@ -20,7 +20,7 @@ const eventEndpoint = (router) => {
 
   router.post(
     "/api/event/buy-ticket",
-    roleAuth(["admin", "organizer"]),
+    roleAuth(["user"]),
     async (request, response) => {
       try {
         const result = await business

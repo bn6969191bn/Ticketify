@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { Router } from '@angular/router';
+import { Event } from 'src/app/models/event.model';
 
 @Component({
   selector: 'app-events',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
-  events: any[] = [];
+  events: Event[] = [];
 
   constructor(private eventService: EventService, private router: Router) {}
 

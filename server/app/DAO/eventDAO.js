@@ -5,7 +5,7 @@ import mongoConverter from "../service/mongoConverter";
 const eventSchema = new mongoose.Schema(
   {
     event_name: { type: String, required: true },
-    date_and_time: { type: Date, required: true },
+    date: { type: Date, required: true },
     location: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "location",

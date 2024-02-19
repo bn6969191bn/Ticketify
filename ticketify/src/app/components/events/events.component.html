@@ -6,7 +6,7 @@
           <mat-card-title>{{ event.event_name }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Data: {{ event.date_and_time | date : "medium" }}</p>
+          <p>Data: {{ event.date | date : "dd/MM/yyyy" }}</p>
           <p>Lokalizacja: {{ event.location.name }}</p>
         </mat-card-content>
       </mat-card>
